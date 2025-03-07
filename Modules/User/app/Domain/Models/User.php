@@ -15,12 +15,14 @@ class User extends Model implements JsonSerializable
         'name', 
         'email',
         'password',
+        'uuid',
     ];
     
     /** @return array<string> */
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
         ];

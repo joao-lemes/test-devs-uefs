@@ -2,6 +2,7 @@
 
 namespace Modules\User\Domain\Services;
 
+use Illuminate\Support\Str;
 use Modules\User\Domain\Repositories\UserRepository;
 use Modules\User\Http\Resources\OutputUser;
 
@@ -15,11 +16,12 @@ class UserService
         string $name,
         string $email,
         string $password
-    ): OutputUser {;
+    ): OutputUser {
         $account = $this->userRepository->create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password),
+            'uuid' => Str::uuid()->toString(),
         ]);
 
         return new OutputUser($account);
