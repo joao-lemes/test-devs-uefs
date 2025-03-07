@@ -14,6 +14,6 @@ use Modules\User\Http\Controllers\UserController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('user', UserController::class)->names('user');
+Route::prefix('user')->controller(UserController::class)->name('user.')->group(function () {
+    Route::post('/', 'storeAction')->name('store');
 });
