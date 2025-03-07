@@ -12,10 +12,10 @@ class User extends Model implements JsonSerializable
     
     /** @var array<string> $fillable */
     protected $fillable = [
+        'uuid',
         'name', 
         'email',
         'password',
-        'uuid',
     ];
     
     /** @return array<string> */
@@ -25,6 +25,8 @@ class User extends Model implements JsonSerializable
             'id' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
+            'created_at' => $this->created_at->toIso8601String(),
+            'updated_at' => $this->updated_at->toIso8601String(),
         ];
     }
 }
