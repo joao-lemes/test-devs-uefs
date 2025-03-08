@@ -3,12 +3,17 @@
 namespace Modules\User\Domain\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use JsonSerializable;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Model implements JsonSerializable
+class User extends Authenticatable implements JWTSubject, JsonSerializable
 {
+    use HasApiTokens;
     use HasFactory;
+    use Notifiable;
     
     /** @var array<string> $fillable */
     protected $fillable = [
@@ -18,6 +23,17 @@ class User extends Model implements JsonSerializable
         'password',
     ];
     
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /** @return array<mixed> */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
+
     /** @return array<string> */
     public function jsonSerialize(): array
     {
