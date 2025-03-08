@@ -7,6 +7,7 @@ return [
     'not_found' => [
         'default' => 'Item not found',
         'reset_password_token' => 'Token to reset password not found',
+        'user' => 'User not found',
     ],
     'bad_request' => [
         'default' => 'Bad request',
