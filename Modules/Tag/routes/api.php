@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Tag\Http\Controllers\TagController;
+use Modules\User\Http\Middleware\JwtMiddleware;
 
 /*
  *--------------------------------------------------------------------------
@@ -16,4 +17,7 @@ use Modules\Tag\Http\Controllers\TagController;
 
 Route::prefix('tags')->controller(TagController::class)->name('tag.')->group(function () {
     Route::get('/', 'listAction')->name('list');
+    Route::middleware(JwtMiddleware::class)->group(function (): void {
+        Route::post('/', 'storeAction')->name('store');
+    });
 });

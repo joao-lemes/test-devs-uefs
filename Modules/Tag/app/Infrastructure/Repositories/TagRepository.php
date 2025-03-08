@@ -21,4 +21,9 @@ class TagRepository implements ITagRepository
             $page
         );
     }
+
+    public function create(array $attributes): Tag
+    {
+        return $this->model->create($attributes);
+    }
 }
