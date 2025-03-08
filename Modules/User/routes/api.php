@@ -20,8 +20,10 @@ Route::prefix('user')->controller(UserController::class)->name('user.')->group(f
     Route::get('/', 'listAction')->name('list');
     Route::post('/', 'storeAction')->name('store');
     Route::get('/{id}', 'getAction')->name('get');
-    Route::put('/{id}', 'updateAction')->name('update');
-    Route::delete('/{id}', 'deleteAction')->name('delete');
+    Route::middleware(JwtMiddleware::class)->group(function (): void {
+        Route::put('/', 'updateAction')->name('update');
+        Route::delete('/', 'deleteAction')->name('delete');
+    });
 });
 
 Route::controller(AuthController::class)->name('auth.')->group(function (): void {

@@ -51,12 +51,12 @@ class UserService
     }
 
     public function update(
-        string $uuid,
         ?string $name,
         ?string $email,
         ?string $currentPassword,
         ?string $newPassword
     ): OutputUser {
+        $uuid = auth()->user()->uuid ?? '';
         $user = $this->userRepository->getByUuid($uuid);
     
         if (empty($user)) {
@@ -76,8 +76,9 @@ class UserService
         return new OutputUser($user);
     }
 
-    public function delete(string $uuid, string $currentPassword): void
+    public function delete(string $currentPassword): void
     {
+        $uuid = auth()->user()->uuid ?? '';
         $user = $this->userRepository->getByUuid($uuid);
     
         if (empty($user)) {
@@ -89,5 +90,6 @@ class UserService
         }
     
         $this->userRepository->delete($user);
+        auth()->logout();
     }
 }
