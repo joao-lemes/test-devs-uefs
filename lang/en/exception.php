@@ -12,6 +12,7 @@ return [
     'bad_request' => [
         'default' => 'Bad request',
         'invalid_id' => 'Invalid id',
+        'incorrect_password' => 'Incorrect current password',
     ],
     'internal_server_error' => 'Internal server error',
 

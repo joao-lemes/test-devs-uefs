@@ -18,4 +18,5 @@ Route::prefix('user')->controller(UserController::class)->name('user.')->group(f
     Route::get('/', 'listAction')->name('list');
     Route::post('/', 'storeAction')->name('store');
     Route::get('/{id}', 'getAction')->name('get');
+    Route::put('/{id}', 'updateAction')->name('update');
 });
