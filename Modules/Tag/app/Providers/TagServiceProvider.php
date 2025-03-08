@@ -4,6 +4,8 @@ namespace Modules\Tag\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Tag\Domain\Repositories\TagRepository as ITagRepository;
+use Modules\Tag\Infrastructure\Repositories\TagRepository;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -27,6 +29,7 @@ class TagServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        $this->app->bind(ITagRepository::class, TagRepository::class);
     }
 
     /**

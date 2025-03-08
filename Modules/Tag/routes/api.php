@@ -14,6 +14,6 @@ use Modules\Tag\Http\Controllers\TagController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('tag', TagController::class)->names('tag');
+Route::prefix('tags')->controller(TagController::class)->name('tag.')->group(function () {
+    Route::get('/', 'listAction')->name('list');
 });
