@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function updateAction(UpdateUserRequest $request): JsonResponse
     {
-        $output = $this->userService->updateByUuid(
+        $output = $this->userService->update(
             $request->id,
             $request->get('name') ?? null,
             $request->get('email') ?? null,
@@ -55,5 +55,15 @@ class UserController extends Controller
         );
 
         return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function deleteAction(UpdateUserRequest $request): JsonResponse
+    {
+        $this->userService->delete(
+            $request->id,
+            $request->get('current_password'),
+        );
+
+        return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 }

@@ -50,7 +50,7 @@ class UserService
         return new OutputUser($user);
     }
 
-    public function updateByUuid(
+    public function update(
         string $uuid,
         ?string $name,
         ?string $email,
@@ -71,8 +71,23 @@ class UserService
         $user->email = $email ? $email : $user->email;
         $user->password = $newPassword ? bcrypt($newPassword) : $user->password;
     
-        $this->userRepository->updateByUuid($user);
+        $this->userRepository->update($user);
     
         return new OutputUser($user);
+    }
+
+    public function delete(string $uuid, string $currentPassword): void
+    {
+        $user = $this->userRepository->getByUuid($uuid);
+    
+        if (empty($user)) {
+            throw new NotFoundException(trans('exception.not_found.user'));
+        }
+    
+        if (!password_verify($currentPassword, $user->password)) {
+            throw new BadRequestException(trans('exception.bad_request.incorrect_password'));
+        }
+    
+        $this->userRepository->delete($user);
     }
 }
