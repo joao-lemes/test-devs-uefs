@@ -32,13 +32,17 @@
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\User\\": "Modules/User/app/",
             "Modules\\User\\Database\\Factories\\": "Modules/User/database/factories/",
-            "Modules\\User\\Database\\Seeders\\": "Modules/User/database/seeders/"
+            "Modules\\User\\Database\\Seeders\\": "Modules/User/database/seeders/",
+            "Modules\\Tag\\": "Modules/Tag/app/",
+            "Modules\\Tag\\Database\\Factories\\": "Modules/Tag/database/factories/",
+            "Modules\\Tag\\Database\\Seeders\\": "Modules/Tag/database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Modules\\User\\Tests\\": "Modules/User/tests/"
+            "Modules\\User\\Tests\\": "Modules/User/tests/",
+            "Modules\\Tag\\Tests\\": "Modules/Tag/tests/"
         }
     },
     "scripts": {
