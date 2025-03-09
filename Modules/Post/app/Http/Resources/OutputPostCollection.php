@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Tag\Http\Resources;
+namespace Modules\Post\Http\Resources;
 
 use App\Http\Resource\OutputSuccess;
 
-class OutputTagCollection extends OutputSuccess
+class OutputPostCollection extends OutputSuccess
 {
     /** @return array<string> */
     public function getData(): array
     {
         return [
-            'tags' => $this->resource->transform(function ($tag) {
-                return $tag->jsonSerialize();
+            'posts' => $this->resource->transform(function ($post) {
+                return $post->jsonSerialize();
             }),
             'meta' => [
                 'current_page' => $this->currentPage(),

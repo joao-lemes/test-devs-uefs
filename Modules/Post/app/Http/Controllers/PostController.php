@@ -3,63 +3,23 @@
 namespace Modules\Post\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Modules\Post\Domain\Services\PostService;
+use Modules\Post\Http\Requests\ListPostRequest;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(private readonly PostService $postService)
     {
-        return view('post::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function listAction(ListPostRequest $request): JsonResponse
     {
-        return view('post::create');
-    }
+        $output = $this->postService->list(
+            $request->get('page') ?? 1,
+            $request->get('per_page') ?? 10
+        );
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('post::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('post::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json($output, JsonResponse::HTTP_OK);
     }
 }

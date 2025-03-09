@@ -4,6 +4,8 @@ namespace Modules\Post\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Post\Domain\Repositories\PostRepository as IPostRepository;
+use Modules\Post\Infrastructure\Repositories\PostRepository;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -27,6 +29,7 @@ class PostServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        $this->app->bind(IPostRepository::class, PostRepository::class);
     }
 
     /**

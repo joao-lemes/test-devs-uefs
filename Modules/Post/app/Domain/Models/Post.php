@@ -1,30 +1,30 @@
 <?php
 
-namespace Modules\Tag\Domain\Models;
+namespace Modules\Post\Domain\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use JsonSerializable;
-use Modules\Post\Domain\Models\Post;
+use Modules\Tag\Domain\Models\Tag;
 
-class Tag extends Model implements JsonSerializable
+class Post extends Model implements JsonSerializable
 {
     use HasFactory;
     
     /** @var array<string> $fillable */
     protected $fillable = [
         'uuid',
-        'name', 
+        'body', 
     ];
 
-    public function posts(): BelongsToMany
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(
-            Post::class,
+            Tag::class,
             'post_tag',
-            'tag_uuid',
             'post_uuid',
+            'tag_uuid',
             'uuid',
             'uuid'
         );
@@ -35,7 +35,8 @@ class Tag extends Model implements JsonSerializable
     {
         return [
             'id' => $this->uuid,
-            'name' => $this->name,
+            'body' => $this->body,
+            'tags' => $this->tags->map(fn($tag) => $tag->jsonSerialize()),
             'created_at' => $this->created_at->toIso8601String(),
             'updated_at' => $this->updated_at->toIso8601String(),
         ];
