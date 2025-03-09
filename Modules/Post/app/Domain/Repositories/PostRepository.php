@@ -11,4 +11,5 @@ interface PostRepository
     public function create(array $attributes): Post;
     public function getByUuid(string $uuid): ?Post;
     public function update(Post $post): void;
+    public function delete(Post $post): void;
 }

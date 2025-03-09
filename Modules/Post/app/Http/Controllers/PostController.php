@@ -5,6 +5,7 @@ namespace Modules\Post\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Post\Domain\Services\PostService;
+use Modules\Post\Http\Requests\DeletePostRequest;
 use Modules\Post\Http\Requests\GetPostRequest;
 use Modules\Post\Http\Requests\ListPostRequest;
 use Modules\Post\Http\Requests\StorePostRequest;
@@ -52,5 +53,14 @@ class PostController extends Controller
         );
 
         return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function deleteAction(DeletePostRequest $request): JsonResponse
+    {
+        $this->postService->delete(
+            $request->id,
+        );
+
+        return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 }

@@ -38,4 +38,9 @@ class PostRepository implements IPostRepository
             'body' => $post->body,
         ]);
     }
+
+    public function delete(Post $post): void
+    {
+        $this->model->where('uuid', $post->uuid)->delete();
+    }
 }

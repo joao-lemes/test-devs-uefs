@@ -77,4 +77,15 @@ class PostService
 
         return new OutputPost($post);
     }
+
+    public function delete(string $uuid): void
+    {
+        $post = $this->postRepository->getByUuid($uuid);
+    
+        if (empty($post)) {
+            throw new NotFoundException(trans('exception.not_found.post'));
+        }
+    
+        $this->postRepository->delete($post);
+    }
 }
