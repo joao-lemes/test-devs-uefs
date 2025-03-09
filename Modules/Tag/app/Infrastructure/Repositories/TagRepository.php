@@ -26,4 +26,9 @@ class TagRepository implements ITagRepository
     {
         return $this->model->create($attributes);
     }
+
+    public function getByUuid(string $uuid): ?Tag
+    {
+        return $this->model->where('uuid', $uuid)->first();
+    }
 }

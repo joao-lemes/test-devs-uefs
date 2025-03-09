@@ -17,6 +17,7 @@ use Modules\User\Http\Middleware\JwtMiddleware;
 
 Route::prefix('tags')->controller(TagController::class)->name('tag.')->group(function () {
     Route::get('/', 'listAction')->name('list');
+    Route::get('/{id}', 'getAction')->name('get');
     Route::middleware(JwtMiddleware::class)->group(function (): void {
         Route::post('/', 'storeAction')->name('store');
     });

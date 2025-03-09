@@ -5,6 +5,7 @@ namespace Modules\Tag\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Tag\Domain\Services\TagService;
+use Modules\Tag\Http\Requests\GetTagRequest;
 use Modules\Tag\Http\Requests\ListTagRequest;
 use Modules\Tag\Http\Requests\StoreTagRequest;
 
@@ -31,5 +32,12 @@ class TagController extends Controller
         );
 
         return response()->json($output, JsonResponse::HTTP_CREATED);
+    }
+
+    public function getAction(GetTagRequest $request): JsonResponse
+    {
+        $output = $this->tagService->getByUuid($request->id);
+
+        return response()->json($output, JsonResponse::HTTP_OK);
     }
 }
