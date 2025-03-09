@@ -36,11 +36,7 @@ class PostService
 
         $tagsId = [];
         foreach ($tags as $tag) {
-            $tagsId[$this->tagService->store($tag)->uuid] = [
-                'uuid' => Str::uuid()->toString(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+            $tagsId[] = $this->tagService->store($tag)->uuid;
         }
         $post->tags()->sync($tagsId);
 
@@ -49,12 +45,36 @@ class PostService
 
     public function getByUuid(string $uuid): OutputPost
     {
-        $tag = $this->postRepository->getByUuid($uuid);
+        $post = $this->postRepository->getByUuid($uuid);
 
-        if (empty($tag)) {
+        if (empty($post)) {
             throw new NotFoundException(trans('exception.not_found.post'));
         }
 
-        return new OutputPost($tag);
+        return new OutputPost($post);
+    }
+
+    /** @param null|array<string> $tags */
+    public function update(string $uuid, string $body, ?array $tags): OutputPost
+    {
+        $post = $this->postRepository->getByUuid($uuid);
+
+        if (empty($post)) {
+            throw new NotFoundException(trans('exception.not_found.post'));
+        }
+
+        $post->body = $body ? $body : $post->body;
+
+        $this->postRepository->update($post);
+
+        if ($tags !== null) {
+            $tagsId = [];
+            foreach ($tags as $tag) {
+                $tagsId[] = $this->tagService->store($tag)->uuid;
+            }
+            $post->tags()->sync($tagsId);
+        }
+
+        return new OutputPost($post);
     }
 }

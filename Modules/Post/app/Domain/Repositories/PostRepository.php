@@ -10,4 +10,5 @@ interface PostRepository
     public function list(int $page, int $perPage): LengthAwarePaginator;
     public function create(array $attributes): Post;
     public function getByUuid(string $uuid): ?Post;
+    public function update(Post $post): void;
 }

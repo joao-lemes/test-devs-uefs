@@ -31,4 +31,11 @@ class PostRepository implements IPostRepository
     {
         return $this->model->where('uuid', $uuid)->first();
     }
+
+    public function update(Post $post): void
+    {
+        $this->model->where('uuid', $post->uuid)->update([
+            'body' => $post->body,
+        ]);
+    }
 }

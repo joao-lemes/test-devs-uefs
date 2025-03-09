@@ -8,6 +8,7 @@ use Modules\Post\Domain\Services\PostService;
 use Modules\Post\Http\Requests\GetPostRequest;
 use Modules\Post\Http\Requests\ListPostRequest;
 use Modules\Post\Http\Requests\StorePostRequest;
+use Modules\Post\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -38,6 +39,17 @@ class PostController extends Controller
     public function getAction(GetPostRequest $request): JsonResponse
     {
         $output = $this->postService->getByUuid($request->id);
+
+        return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function updateAction(UpdatePostRequest $request): JsonResponse
+    {
+        $output = $this->postService->update(
+            $request->id,
+            $request->get('body'),
+            $request->get('tags'),
+        );
 
         return response()->json($output, JsonResponse::HTTP_OK);
     }
