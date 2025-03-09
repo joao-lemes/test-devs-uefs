@@ -8,6 +8,7 @@ use Modules\Tag\Domain\Services\TagService;
 use Modules\Tag\Http\Requests\GetTagRequest;
 use Modules\Tag\Http\Requests\ListTagRequest;
 use Modules\Tag\Http\Requests\StoreTagRequest;
+use Modules\Tag\Http\Requests\UpdateTagRequest;
 
 class TagController extends Controller
 {
@@ -37,6 +38,16 @@ class TagController extends Controller
     public function getAction(GetTagRequest $request): JsonResponse
     {
         $output = $this->tagService->getByUuid($request->id);
+
+        return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function updateAction(UpdateTagRequest $request): JsonResponse
+    {
+        $output = $this->tagService->update(
+            $request->id,
+            $request->get('name')
+        );
 
         return response()->json($output, JsonResponse::HTTP_OK);
     }

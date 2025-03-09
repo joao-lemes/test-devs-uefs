@@ -31,4 +31,11 @@ class TagRepository implements ITagRepository
     {
         return $this->model->where('uuid', $uuid)->first();
     }
+
+    public function update(Tag $tag): void
+    {
+        $this->model->where('uuid', $tag->uuid)->update([
+            'name' => $tag->name,
+        ]);
+    }
 }

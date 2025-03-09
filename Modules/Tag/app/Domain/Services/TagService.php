@@ -35,12 +35,27 @@ class TagService
 
     public function getByUuid(string $uuid): OutputTag
     {
-        $user = $this->tagRepository->getByUuid($uuid);
+        $tag = $this->tagRepository->getByUuid($uuid);
 
-        if (empty($user)) {
+        if (empty($tag)) {
             throw new NotFoundException(trans('exception.not_found.tag'));
         }
 
-        return new OutputTag($user);
+        return new OutputTag($tag);
+    }
+
+    public function update(string $uuid, string $name): OutputTag
+    {
+        $tag = $this->tagRepository->getByUuid($uuid);
+    
+        if (empty($tag)) {
+            throw new NotFoundException(trans('exception.not_found.tag'));
+        }
+
+        $tag->name = $name ? $name : $tag->name;
+    
+        $this->tagRepository->update($tag);
+    
+        return new OutputTag($tag);
     }
 }

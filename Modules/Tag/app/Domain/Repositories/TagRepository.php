@@ -10,4 +10,5 @@ interface TagRepository
     public function list(int $page, int $perPage): LengthAwarePaginator;
     public function create(array $attributes): Tag;
     public function getByUuid(string $uuid): ?Tag;
+    public function update(Tag $tag): void;
 }
