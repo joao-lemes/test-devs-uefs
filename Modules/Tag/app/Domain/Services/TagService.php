@@ -58,4 +58,15 @@ class TagService
     
         return new OutputTag($tag);
     }
+
+    public function delete(string $uuid): void
+    {
+        $tag = $this->tagRepository->getByUuid($uuid);
+    
+        if (empty($tag)) {
+            throw new NotFoundException(trans('exception.not_found.tag'));
+        }
+    
+        $this->tagRepository->delete($tag);
+    }
 }

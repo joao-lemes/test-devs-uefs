@@ -21,5 +21,6 @@ Route::prefix('tags')->controller(TagController::class)->name('tag.')->group(fun
     Route::middleware(JwtMiddleware::class)->group(function (): void {
         Route::post('/', 'storeAction')->name('store');
         Route::put('/{id}', 'updateAction')->name('update');
+        Route::delete('/{id}', 'deleteAction')->name('delete');
     });
 });

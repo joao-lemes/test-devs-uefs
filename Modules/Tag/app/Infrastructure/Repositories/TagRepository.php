@@ -38,4 +38,9 @@ class TagRepository implements ITagRepository
             'name' => $tag->name,
         ]);
     }
+
+    public function delete(Tag $tag): void
+    {
+        $this->model->where('uuid', $tag->uuid)->delete();
+    }
 }

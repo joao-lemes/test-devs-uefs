@@ -5,6 +5,7 @@ namespace Modules\Tag\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Tag\Domain\Services\TagService;
+use Modules\Tag\Http\Requests\DeleteTagRequest;
 use Modules\Tag\Http\Requests\GetTagRequest;
 use Modules\Tag\Http\Requests\ListTagRequest;
 use Modules\Tag\Http\Requests\StoreTagRequest;
@@ -50,5 +51,14 @@ class TagController extends Controller
         );
 
         return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function deleteAction(DeleteTagRequest $request): JsonResponse
+    {
+        $this->tagService->delete(
+            $request->id,
+        );
+
+        return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 }
