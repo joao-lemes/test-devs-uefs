@@ -1,4 +1,5 @@
 {
     "User": true,
-    "Tag": true
+    "Tag": true,
+    "Post": true
 }
