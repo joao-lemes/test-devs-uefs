@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Post\Http\Controllers\PostController;
+use Modules\User\Http\Middleware\JwtMiddleware;
 
 /*
  *--------------------------------------------------------------------------
@@ -16,4 +17,7 @@ use Modules\Post\Http\Controllers\PostController;
 
 Route::prefix('posts')->controller(PostController::class)->name('post.')->group(function () {
     Route::get('/', 'listAction')->name('list');
+    Route::middleware(JwtMiddleware::class)->group(function (): void {
+        Route::post('/', 'storeAction')->name('store');
+    });
 });

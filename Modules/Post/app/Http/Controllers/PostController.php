@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Post\Domain\Services\PostService;
 use Modules\Post\Http\Requests\ListPostRequest;
+use Modules\Post\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -21,5 +22,15 @@ class PostController extends Controller
         );
 
         return response()->json($output, JsonResponse::HTTP_OK);
+    }
+
+    public function storeAction(StorePostRequest $request): JsonResponse
+    {
+        $output = $this->postService->store(
+            $request->get('body'),
+            $request->get('tags') ?? [],
+        );
+
+        return response()->json($output, JsonResponse::HTTP_CREATED);
     }
 }

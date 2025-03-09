@@ -22,9 +22,9 @@ class TagRepository implements ITagRepository
         );
     }
 
-    public function create(array $attributes): Tag
+    public function firstOrCreate(array $attributes, array $values): Tag
     {
-        return $this->model->create($attributes);
+        return $this->model->firstOrCreate($attributes, $values);
     }
 
     public function getByUuid(string $uuid): ?Tag

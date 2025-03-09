@@ -25,10 +25,12 @@ class TagService
 
     public function store(string $name): OutputTag
     {
-        $tag = $this->tagRepository->create([
-            'name' => $name,
-            'uuid' => Str::uuid()->toString(),
-        ]);
+        $tag = $this->tagRepository->firstOrCreate(
+            ['name' => $name],
+            [
+                'uuid' => Str::uuid()->toString(),
+            ]
+        );
 
         return new OutputTag($tag);
     }

@@ -21,4 +21,9 @@ class PostRepository implements IPostRepository
             $page
         );
     }
+
+    public function create(array $attributes): Post
+    {
+        return $this->model->create($attributes);
+    }
 }
