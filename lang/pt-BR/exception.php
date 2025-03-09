@@ -9,6 +9,7 @@ return [
         'reset_password_token' => 'Token para resetar a senha não encontrado',
         'user' => 'Usuário não encontrado',
         'tag' => 'Tag não encontrada',
+        'post' => 'Post não encontrado',
     ],
     'bad_request' => [
         'default' => 'Requisição ruim',

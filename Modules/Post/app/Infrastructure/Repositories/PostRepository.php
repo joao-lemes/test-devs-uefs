@@ -26,4 +26,9 @@ class PostRepository implements IPostRepository
     {
         return $this->model->create($attributes);
     }
+
+    public function getByUuid(string $uuid): ?Post
+    {
+        return $this->model->where('uuid', $uuid)->first();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\Post\Domain\Services;
 
+use App\Exceptions\NotFoundException;
 use Illuminate\Support\Str;
 use Modules\Post\Domain\Repositories\PostRepository;
 use Modules\Post\Http\Resources\OutputPost;
@@ -44,5 +45,16 @@ class PostService
         $post->tags()->sync($tagsId);
 
         return new OutputPost($post);
+    }
+
+    public function getByUuid(string $uuid): OutputPost
+    {
+        $tag = $this->postRepository->getByUuid($uuid);
+
+        if (empty($tag)) {
+            throw new NotFoundException(trans('exception.not_found.post'));
+        }
+
+        return new OutputPost($tag);
     }
 }

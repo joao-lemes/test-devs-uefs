@@ -17,6 +17,7 @@ use Modules\User\Http\Middleware\JwtMiddleware;
 
 Route::prefix('posts')->controller(PostController::class)->name('post.')->group(function () {
     Route::get('/', 'listAction')->name('list');
+    Route::get('/{id}', 'getAction')->name('get');
     Route::middleware(JwtMiddleware::class)->group(function (): void {
         Route::post('/', 'storeAction')->name('store');
     });
