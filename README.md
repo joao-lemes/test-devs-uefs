@@ -1,3 +1,59 @@
+
+# Teste Técnico para a vaga de Engenheiro de Software no projeto UEFS - Avansys/ACP Group
+
+Projeto desenvolvido para avaliação técnica, seguindo princípios de DDD (Domain-Driven Design) e clean arch.
+
+
+## Dados técnicos
+
+```
+PHP: 8.3
+Laravel: 11.3
+Mysql: 8.0
+```
+
+
+## Configuração
+
+### Copiar arquivo .env
+
+Faça uma cópia dos arquivos `.env.example` para `.env` que estão na raiz do projeto
+
+
+### Subir docker
+
+```
+docker-compose up -d --build
+```
+
+Obs: Estas máquinas tem que estar rodando:<br>
+![docker](docker.png)
+
+### Instalar dependências
+
+```
+docker-compose exec app composer install
+```
+
+### Migrar banco de dados
+
+```
+docker-compose exec app php artisan migrate
+```
+
+### Adicionar permissão para a pasta storage
+
+```
+sudo chmod 777 -R storage/
+```
+
+## Links úteis
+
+### Documentação Postman
+
+Documentação: [https://documenter.getpostman.com/view/14196384/2sAYk8viW9](https://documenter.getpostman.com/view/14196384/2sAYk8viW9)
+
+
 # Teste Técnico para a vaga de Engenheiro de Software no projeto UEFS - Avansys/ACP Group
 
 Este desafio técnico é destinado aos candidatos à posição de Engenheiro de Software no projeto UEFS - Avansys/ACP Group. O objetivo é avaliar as competências em desenvolvimento de software através da criação de uma API Restful utilizando PHP, Laravel (versão 8 ou superior), um Sistema de Gerenciamento de Banco de Dados (SGBD) de sua escolha, e Docker. O prazo para a realização deste teste é de 5 dias, e a entrega deve ser feita por meio do GitHub para análise.
